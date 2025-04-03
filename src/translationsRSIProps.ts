@@ -24,6 +24,15 @@ export const translations = {
     nextButtonTitle: "Next",
     backButtonTitle: "Back",
   },
+  entityRelationValidationStep: {
+    title: "Validate related entities",
+    nextButtonTitle: "Confirm",
+    backButtonTitle: "Back",
+    noRowsMessage: "No data found",
+    noRowsMessageWhenFiltered: "No data containing errors",
+    discardButtonTitle: "Discard selected rows",
+    filterSwitchTitle: "Show only rows with errors",
+  },
   matchColumnsStep: {
     title: "Match Columns",
     nextButtonTitle: "Next",

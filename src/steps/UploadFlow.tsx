@@ -11,11 +11,13 @@ import { MatchColumnsStep } from "./MatchColumnsStep/MatchColumnsStep"
 import { exceedsMaxRecords } from "../utils/exceedsMaxRecords"
 import { useRsi } from "../hooks/useRsi"
 import type { RawData } from "../types"
+import { EntityRelationValidationStep } from "./EntityRelationValidationStep/EntityRelationValidationStep"
 
 export enum StepType {
   upload = "upload",
   selectSheet = "selectSheet",
   selectHeader = "selectHeader",
+  entityRelationValidation = "entityRelationValidation",
   matchColumns = "matchColumns",
   validateData = "validateData",
 }
@@ -30,6 +32,11 @@ export type StepState =
   | {
       type: StepType.selectHeader
       data: RawData[]
+    }
+  | {
+      type: StepType.entityRelationValidation
+      data: RawData[]
+      headerValues: RawData
     }
   | {
       type: StepType.matchColumns
@@ -131,7 +138,7 @@ export const UploadFlow = ({ state, onNext, onBack }: Props) => {
             try {
               const { data, headerValues } = await selectHeaderStepHook(...args)
               onNext({
-                type: StepType.matchColumns,
+                type: StepType.entityRelationValidation,
                 data,
                 headerValues,
               })
@@ -164,6 +171,28 @@ export const UploadFlow = ({ state, onNext, onBack }: Props) => {
       )
     case StepType.validateData:
       return <ValidationStep initialData={state.data} file={uploadedFile!} onBack={onBack} />
+    case StepType.entityRelationValidation:
+      return (
+        <EntityRelationValidationStep
+          data={state.data}
+          headerValues={state.headerValues}
+          onContinue={async (...args) => {
+            try {
+              const { data, headerValues } = await selectHeaderStepHook(...args)
+
+              console.log('data, headerValues:', data, headerValues);
+              onNext({
+                type: StepType.matchColumns,
+                data,
+                headerValues,
+              })
+            } catch (e) {
+              errorToast((e as Error).message)
+            }
+          }}
+          onBack={onBack}
+        />
+      )
     default:
       return <Progress isIndeterminate />
   }

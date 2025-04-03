@@ -306,6 +306,122 @@ export const themeOverrides = {
         } as ChakraStylesConfig<SelectOption>,
       },
     },
+    EntityRelationValidationStep: {
+      baseStyle: {
+        heading: {
+          color: "textColor",
+          mb: 8,
+          fontSize: "3xl",
+        },
+        title: {
+          color: "textColor",
+          fontSize: "2xl",
+          lineHeight: 8,
+          fontWeight: "semibold",
+          mb: 4,
+        },
+        userTable: {
+          header: {
+            fontSize: "xs",
+            lineHeight: 4,
+            fontWeight: "bold",
+            letterSpacing: "wider",
+            color: "textColor",
+            overflow: "hidden",
+            whiteSpace: "nowrap",
+            textOverflow: "ellipsis",
+            ["&[data-ignored]"]: {
+              color: "inactiveColor",
+            },
+          },
+          cell: {
+            fontSize: "sm",
+            lineHeight: 5,
+            fontWeight: "medium",
+            color: "textColor",
+            px: 6,
+            py: 4,
+            overflow: "hidden",
+            whiteSpace: "nowrap",
+            textOverflow: "ellipsis",
+            ["&[data-ignored]"]: {
+              color: "inactiveColor",
+            },
+          },
+          ignoreButton: {
+            size: "xs",
+            colorScheme: "gray",
+            color: "textColor",
+          },
+        },
+        selectColumn: {
+          text: {
+            fontSize: "sm",
+            lineHeight: 5,
+            fontWeight: "normal",
+            color: "inactiveColor",
+            px: 4,
+          },
+          accordionLabel: {
+            color: "blue.600",
+            fontSize: "sm",
+            lineHeight: 5,
+            pl: 1,
+          },
+          selectLabel: {
+            pt: "0.375rem",
+            pb: 2,
+            fontSize: "md",
+            lineHeight: 6,
+            fontWeight: "medium",
+            color: "textColor",
+          },
+        },
+        select: {
+          control: (provided) => ({
+            ...provided,
+            borderColor: "border",
+            _hover: {
+              borderColor: "border",
+            },
+            ["&[data-focus-visible]"]: {
+              borderColor: "border",
+              boxShadow: "none",
+            },
+          }),
+          menu: (provided) => ({
+            ...provided,
+            p: 0,
+            mt: 0,
+          }),
+          menuList: (provided) => ({
+            ...provided,
+            bg: "background",
+            borderColor: "border",
+          }),
+          option: (provided, state) => ({
+            ...provided,
+            color: "textColor",
+            bg: state.isSelected || state.isFocused ? "highlight" : "background",
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+            display: "block",
+            whiteSpace: "nowrap",
+            _hover: {
+              bg: "highlight",
+            },
+          }),
+          placeholder: (provided) => ({
+            ...provided,
+            color: "inactiveColor",
+          }),
+          noOptionsMessage: (provided) => ({
+            ...provided,
+            color: "inactiveColor",
+          }),
+        } as ChakraStylesConfig<SelectOption>,
+      },
+    },
     MatchIcon: MatchIconTheme,
     Steps: StepsComponent,
     Modal: {
